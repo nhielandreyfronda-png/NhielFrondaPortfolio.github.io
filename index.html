@@ -144,6 +144,30 @@ footer .flinks a:hover{color:var(--fg)}
 .media-item{margin:0;background:var(--panel);overflow:hidden;border:1px solid var(--line)}
 .media-item img{width:100%;display:block;max-height:78vh;object-fit:cover}
 .media-item.wide{grid-column:1/-1}
+
+.project-canva-card{background:#111}
+.project-canva-head{
+  display:flex;justify-content:space-between;align-items:center;gap:14px;
+  padding:11px 13px;border-bottom:1px solid var(--line);
+  font-family:'JetBrains Mono',monospace;font-size:9px;
+  text-transform:uppercase;letter-spacing:.06em;color:var(--muted);
+}
+.project-canva-head a{color:var(--fg);white-space:nowrap}
+.project-canva-head a:hover{color:var(--accent)}
+.project-canva-frame{
+  width:100%;
+  aspect-ratio:16/9;
+  background:#666;
+  padding:8px;
+  overflow:hidden;
+}
+.project-canva-frame iframe{
+  width:100%;height:100%;display:block;border:0;background:#fff;
+}
+@media(max-width:750px){
+  .project-canva-head{align-items:flex-start;flex-direction:column;gap:8px}
+  .project-canva-frame{aspect-ratio:16/9;padding:4px}
+}
 .media-label{padding:9px 12px;font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);background:var(--panel);border-top:1px solid var(--line)}
 .video-card{position:relative;display:block}
 .video-card img{filter:brightness(.72)}
@@ -355,13 +379,11 @@ footer{padding:25px 0 45px;font-size:9px}
   }
 }
 
-.youtube-frame{
   position:relative;
   width:100%;
   aspect-ratio:16/9;
   background:#080808;
 }
-.youtube-frame iframe{
   position:absolute;
   inset:0;
   width:100%;
@@ -504,14 +526,12 @@ a, .title, .meta, .hero-name, .eyebrow, .section-head h2{
   text-decoration:none;
 }
 .video-section-head a:hover{color:var(--accent-bright)}
-.youtube-frame{
   position:relative;
   width:100%;
   aspect-ratio:16/9;
   background:#080808;
   overflow:hidden;
 }
-.youtube-frame iframe{
   position:absolute;
   inset:0;
   width:100%;
@@ -528,6 +548,288 @@ a, .title, .meta, .hero-name, .eyebrow, .section-head h2{
 .sketchfab-tab.active{color:#111;background:var(--accent);font-weight:700}
 .sketchfab-tab:focus-visible{outline:1px solid var(--accent);outline-offset:-2px}
 @media(max-width:750px){.sketchfab-tab{padding:12px 13px;font-size:9px}}
+
+/* Clean PDF viewer: no PDF tabs */
+#architectural-plans .plans-tabs,
+#architectural-plans .plans-tab{
+  display:none !important;
+}
+
+</style>
+
+<style>
+/* ---- CV presentation refinement ---- */
+.cv-head{position:relative}
+.cv-head .role{font-size:12px;letter-spacing:.02em}
+.cv-contact{display:flex;gap:18px;flex-wrap:wrap;margin-top:15px;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted)}
+.cv-contact a:hover,.cv-section a:hover{color:var(--accent)}
+.cv-summary{max-width:75ch!important;font-size:15px!important;line-height:1.75!important;color:#d0cec7!important}
+.cv-skill-group{margin-bottom:20px}
+.cv-skill-group:last-child{margin-bottom:0}
+.cv-skill-label{font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.07em;font-size:9px;color:var(--fg);margin-bottom:9px}
+.cv-tags{gap:7px}
+.cv-tags span{font-size:9.5px;padding:6px 8px}
+.cv-list{margin:9px 0 0;padding-left:18px;max-width:70ch}
+.cv-list li{font-size:12.5px;line-height:1.6;color:#c7c6c0;margin:4px 0}
+.cv-sub.strong{color:var(--fg);font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.06em;font-size:9px;margin-top:13px}
+.cv-personal{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.cv-personal div{border:1px solid var(--line);padding:12px;font-size:12px;color:#c7c6c0}
+.cv-personal span{display:block;font-family:'JetBrains Mono',monospace;text-transform:uppercase;font-size:8px;letter-spacing:.08em;color:var(--muted);margin-bottom:5px}
+.cv-address p{font-size:12.5px;color:#c7c6c0;line-height:1.6;margin:0 0 14px}
+.cv-contact-grid{display:flex;gap:20px;flex-wrap:wrap;font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--muted)}
+@media(max-width:700px){
+  .cv-personal{grid-template-columns:1fr 1fr}
+  .cv-contact{display:block}
+  .cv-contact>*{display:block;margin-bottom:5px}
+}
+
+/* ============================================================
+   ARCHITECTURAL PLANS — PDF TAB / SLIDE VIEWER
+   Put PDF files beside index.html, or inside a pdf/ folder.
+   Recommended: landscape PDFs (A3/A2/A1 landscape also work).
+   ============================================================ */
+.plans-section{
+  border-top:1px solid var(--line);
+  padding:28px 0 125px;
+}
+
+
+
+.pdf-toolbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:14px;
+  flex-wrap:wrap;
+  margin-bottom:12px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;
+  color:var(--muted);
+}
+.pdf-controls{display:flex;align-items:center;gap:7px}
+.pdf-controls button{
+  border:1px solid var(--line);
+  background:#0d0d0d;
+  color:var(--fg);
+  padding:7px 11px;
+  cursor:pointer;
+  font:inherit;
+}
+.pdf-controls button:hover{border-color:var(--accent);color:var(--accent)}
+.pdf-controls button:disabled{opacity:.35;cursor:not-allowed}
+
+.pdf-arrow{
+  width:44px;
+  height:44px;
+  padding:0;
+  border:1px solid rgba(255,255,255,.28);
+  border-radius:50%;
+  background:#111;
+  color:#fff;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-size:32px;
+  font-weight:300;
+  line-height:1;
+  cursor:pointer;
+  transition:transform .18s ease, background .18s ease, opacity .18s ease;
+}
+.pdf-arrow:hover:not(:disabled){
+  transform:scale(1.08);
+  background:#2a2a2a;
+}
+.pdf-arrow:disabled{
+  opacity:.25;
+  cursor:not-allowed;
+}
+.pdf-page-label{min-width:74px;text-align:center}
+
+.pdf-stage{
+  position:relative;
+  width:100%;
+  min-height:500px;
+  background:#777;
+  border:1px solid #343434;
+  padding:18px;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  overflow:auto;
+}
+.pdf-page-wrap{
+  position:relative;
+  display:inline-block;
+  background:#fff;
+  box-shadow:0 12px 35px rgba(0,0,0,.35);
+  line-height:0;
+}
+#pdfViewer{
+  width:100%;
+  height:720px;
+  border:0;
+  display:block;
+  background:#fff;
+}
+.pdf-empty{
+  width:100%;
+  min-height:460px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:#d0d0d0;
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;
+  line-height:1.8;
+  padding:30px;
+}
+.pdf-error{color:#ffb3b3}
+
+/* CV: gray workspace + A4 paper sheet */
+#cvModal{background:#8b8b8b}
+#cvModal .modal-top{
+  background:rgba(30,30,30,.96);
+  border-bottom-color:#555;
+}
+#cvModal .cv-content{
+  width:min(210mm,92vw);
+  max-width:210mm;
+  margin:36px auto 70px;
+  padding:18mm 15mm;
+  min-height:297mm;
+  background:#fff;
+  color:#111;
+  border:1px solid #c7c7c7;
+  box-shadow:0 18px 45px rgba(0,0,0,.28);
+}
+#cvModal .cv-head{border-bottom:1px solid #bdbdbd}
+#cvModal .cv-head h2,
+#cvModal .cv-entry .cv-title,
+#cvModal .cv-section h3,
+#cvModal .cv-skill-label{color:#111}
+#cvModal .cv-head .role,
+#cvModal .cv-entry .cv-sub,
+#cvModal .cv-entry .cv-date,
+#cvModal .cv-summary,
+#cvModal .cv-entry p,
+#cvModal .cv-list li,
+#cvModal .cv-personal div,
+#cvModal .cv-address p{color:#444}
+#cvModal .cv-section{border-top-color:#c7c7c7}
+#cvModal .cv-tags span,
+#cvModal .cv-personal div{border-color:#c7c7c7;color:#444}
+#cvModal .cv-contact,
+#cvModal .cv-contact a,
+#cvModal .cv-contact-grid{color:#555}
+#cvModal .cv-contact a:hover,
+#cvModal .cv-section a:hover{color:#8b7657}
+@media(max-width:750px){
+  .plans-section{padding-bottom:85px}
+  .pdf-stage{min-height:380px;padding:10px}
+  #pdfViewer{height:520px}
+  #cvModal .cv-content{
+    width:calc(100vw - 24px);
+    max-width:none;
+    min-height:auto;
+    margin:18px auto 35px;
+    padding:12mm 9mm;
+  }
+}
+@media print{
+  body{background:#fff}
+  #cvModal{position:static;background:#fff}
+  #cvModal .modal-top{display:none}
+  #cvModal .cv-content{
+    margin:0;
+    width:210mm;
+    min-height:297mm;
+    box-shadow:none;
+    border:0;
+  }
+}
+
+
+.pdf-stage::after{
+  content:"PDF is displayed by your browser's built-in PDF viewer. If you see a blank page, make sure the PDF is inside the /pdf folder and open the website through GitHub Pages or a local web server.";
+  display:block;
+  width:100%;
+  padding:10px 4px 0;
+  color:#ddd;
+  font-family:'JetBrains Mono',monospace;
+  font-size:8px;
+  line-height:1.6;
+}
+
+
+/* ---- ARCHITECTURAL PLANS: LANDSCAPE PDF PRESENTATION ---- */
+#architectural-plans .pdf-stage{
+  width:100%;
+  aspect-ratio:16/9;
+  min-height:0;
+  height:auto;
+  padding:12px;
+  background:#666;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+#architectural-plans #pdfViewer{
+  width:100%;
+  height:100%;
+  min-height:0;
+  border:0;
+  background:#fff;
+  display:block;
+}
+#architectural-plans .pdf-stage::after{
+  display:none;
+}
+@media(max-width:750px){
+  #architectural-plans .pdf-stage{
+    aspect-ratio:16/9;
+    padding:6px;
+  }
+  #architectural-plans #pdfViewer{
+    height:100%;
+  }
+}
+
+
+/* ============================================================
+   ARCHITECTURAL PLANS — CANVA VIEWER / 3 TABS
+   ============================================================ */
+.canva-plans{border-top:1px solid var(--line);padding:28px 0 125px}
+.canva-tabs{display:flex;gap:0;overflow-x:auto;border-bottom:1px solid var(--line);scrollbar-width:thin;margin-bottom:12px}
+.canva-tab{appearance:none;border:0;border-bottom:2px solid transparent;background:transparent;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.05em;padding:12px 16px;cursor:pointer;white-space:nowrap;transition:color .2s ease,background .2s ease,border-color .2s ease}
+.canva-tab:hover{color:var(--fg);background:#111}
+.canva-tab.active{color:#111;background:var(--accent);border-bottom-color:var(--accent);font-weight:700}
+.canva-tab:focus-visible{outline:1px solid var(--accent);outline-offset:-2px}
+.canva-toolbar{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:12px;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted)}
+.canva-toolbar a{color:var(--fg);border:1px solid var(--line);padding:7px 11px}
+.canva-toolbar a:hover{color:#111;background:var(--accent);border-color:var(--accent)}
+.canva-stage{width:100%;aspect-ratio:16/9;min-height:0;background:#666;border:1px solid #343434;padding:8px;overflow:hidden}
+#canvaViewer{width:100%;height:100%;border:0;display:block;background:#fff}
+@media(max-width:750px){
+  .canva-plans{padding-bottom:85px}
+  .canva-tab{padding:12px 13px;font-size:9px}
+  .canva-stage{aspect-ratio:16/9;padding:4px}
+}
+</style>
+
+
+<style>
+.front-canva{border-top:1px solid var(--line);padding:28px 0 90px}
+.front-canva-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:16px}
+.front-canva-head h2{font-family:'JetBrains Mono',monospace;font-size:13px;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin:0}
+.front-canva-head span{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted)}
+.front-canva-frame{width:100%;aspect-ratio:16/9;background:#666;border:1px solid #343434;padding:8px;overflow:hidden;box-shadow:0 14px 40px rgba(0,0,0,.22)}
+.front-canva-frame iframe{width:100%;height:100%;border:0;display:block;background:#fff}
+.front-canva-actions{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted)}
+.front-canva-actions a{border:1px solid var(--line);padding:8px 11px;color:var(--fg)}
+.front-canva-actions a:hover{color:#111;background:var(--accent);border-color:var(--accent)}
+@media(max-width:750px){.front-canva{padding-bottom:70px}.front-canva-frame{aspect-ratio:16/9;padding:4px}.front-canva-head{display:block}.front-canva-head span{display:block;margin-top:7px}.front-canva-actions{align-items:flex-start;flex-direction:column}}
 </style>
 </head>
 <body>
@@ -547,9 +849,6 @@ a, .title, .meta, .hero-name, .eyebrow, .section-head h2{
     Create these folders beside index.html: images/  videos/(optional)
     Use the filenames listed in the PROJECTS array near the bottom script.
 
- 4) PROJECT VIDEOS (YouTube)
-    In the PROJECTS array, replace each youtube URL with your full YouTube link
-    for example: 'https://www.youtube.com/watch?v=XXXXXXXXXXX'.
     Leave it as '' if a project has no video yet.
 ========================================================================
 -->
@@ -565,7 +864,7 @@ a, .title, .meta, .hero-name, .eyebrow, .section-head h2{
 <div class="wrap">
 <header>
   <a class="logo">N.A.T.F<span> / ARCH</span></a>
-  <nav class="nav"><a href="#work">Work</a><a href="#model">Model</a><a href="#about">About</a><a onclick="openCV()">CV</a><a href="#contact">Contact</a></nav>
+  <nav class="nav"><a href="#work">Work</a><a href="#architectural-plans">Plans</a><a href="#model">Model</a><a href="#about">About</a><a onclick="openCV()">CV</a><a href="#contact">Contact</a></nav>
 </header>
 
 <section class="hero">
@@ -589,6 +888,20 @@ a, .title, .meta, .hero-name, .eyebrow, .section-head h2{
 </div>
 </section>
 
+<section id="front-canva" class="front-canva">
+  <div class="front-canva-head">
+    <h2>WALKTHROUGH / VIDEO</h2>
+    <span>LIVE CANVA VIEW · LANDSCAPE 16:9</span>
+  </div>
+  <div class="front-canva-frame">
+    <iframe src="https://www.canva.com/design/DAHUtYWMjfo/rZyM7FLFfjy4L8RSB1clSg/view?embed" title="Kings Forth Subdivision — Architectural Plans in Canva" loading="eager" allowfullscreen></iframe>
+  </div>
+  <div class="front-canva-actions">
+    <span>Kings Forth Subdivision · Architectural Plan Presentation</span>
+    <a href="https://canva.link/94dmcnaxw44g1by" target="_blank" rel="noopener">Open Full Canva ↗</a>
+  </div>
+</section>
+
 <section class="profile-links">
   <div class="profile-links-label">Profiles / Online Work</div>
   <div class="profile-links-list">
@@ -609,12 +922,12 @@ a, .title, .meta, .hero-name, .eyebrow, .section-head h2{
   <div class="info"><div><div class="title">Kings Forth Subdivision</div><div class="meta" style="text-align:left">Residential Subdivision / Concept</div></div><div class="meta">2026</div></div>
 </article>
 <article class="project" onclick="openProject(2)">
-  <div class="thumb"><img src="images/project-02-01.jpg" alt="Concrete / Light"><div class="sheet-tag">A-102</div><div class="open-hint">Open project</div></div>
-  <div class="info"><div><div class="title">Concrete / Light</div><div class="meta" style="text-align:left">Commercial / Interior</div></div><div class="meta">2025</div></div>
+  <div class="thumb"><img src="images/c1.png" alt="Coffee Shop"><div class="sheet-tag">A-102</div><div class="open-hint">Open project</div></div>
+  <div class="info"><div><div class="title">Coffee Shop</div><div class="meta" style="text-align:left">Commercial / Interior</div></div><div class="meta">2025</div></div>
 </article>
 <article class="project" onclick="openProject(3)">
-  <div class="thumb"><img src="images/project-03-01.jpg" alt="Northline Office"><div class="sheet-tag">A-103</div><div class="open-hint">Open project</div></div>
-  <div class="info"><div><div class="title">Northline Office</div><div class="meta" style="text-align:left">Workplace / Fit-out</div></div><div class="meta">2025</div></div>
+  <div class="thumb"><img src="images/cab1.png" alt="Modular Design"><div class="sheet-tag">A-103</div><div class="open-hint">Open project</div></div>
+  <div class="info"><div><div class="title">Modular Design</div><div class="meta" style="text-align:left">Cabinet / Fit-out</div></div><div class="meta">2025</div></div>
 </article>
 <article class="project" onclick="openProject(4)">
   <div class="thumb"><img src="images/project-04-01.jpg" alt="Tropical Residence"><div class="sheet-tag">A-104</div><div class="open-hint">Open project</div></div>
@@ -630,6 +943,34 @@ a, .title, .meta, .hero-name, .eyebrow, .section-head h2{
 </article>
 </div></section>
 
+
+<!-- ============================================================
+     ARCHITECTURAL PLANS
+     To add your PDFs, edit ARCHITECTURAL_PLANS near the bottom:
+       { file:'pdf/architectural-plan-01.pdf', title:'Site Plan' }
+     Use at least 3 landscape PDF files.
+     ============================================================ -->
+<section id="architectural-plans" class="plans-section canva-plans">
+  <div class="section-head">
+    <h2>Architectural Plans</h2>
+    <span>Canva Presentation / Landscape Views</span>
+  </div>
+
+  <div class="canva-tabs" role="tablist" aria-label="Architectural plan views">
+    <button class="canva-tab active" type="button" data-plan="0" role="tab" aria-selected="true">01 · Site / Master Plan</button>
+    <button class="canva-tab" type="button" data-plan="1" role="tab" aria-selected="false">02 · Floor Plans</button>
+    <button class="canva-tab" type="button" data-plan="2" role="tab" aria-selected="false">03 · Elevations / Sections</button>
+  </div>
+
+  <div class="canva-toolbar">
+    <div id="canvaPlanName">01 · Site / Master Plan</div>
+    <a id="canvaOpenLink" href="https://www.canva.com/design/DAHUtJ409Os/kr52CfyvQ6bXfzfct1OxQg/view" target="_blank" rel="noopener">Open in Canva ↗</a>
+  </div>
+
+  <div class="canva-stage">
+    <iframe id="canvaViewer" title="Architectural Plan — Canva" loading="lazy" allowfullscreen></iframe>
+  </div>
+</section>
 <div id="projectModal" class="modal" aria-hidden="true">
   <div class="modal-top">
     <div><span id="modalNumber" class="mono">A-101</span> / <span id="modalTitle">Project</span></div>
@@ -660,57 +1001,206 @@ a, .title, .meta, .hero-name, .eyebrow, .section-head h2{
     <div class="cv-head">
       <h2>Nhiel Andrey T. Fronda</h2>
       <div class="cred">SO2, RMP</div>
-      <div class="role">Architectural Product Designer</div>
-    </div>
-
-    <div class="cv-section">
-      <h3>Profile</h3>
-      <p style="max-width:70ch">One or two sentences summarizing your background, focus area and what you bring to a project. <!-- EDIT: your summary --></p>
-    </div>
-
-    <div class="cv-section">
-      <h3>Licenses &amp; Certifications</h3>
-      <div class="cv-entry">
-        <div class="cv-date">— <!-- EDIT: year/expiry --></div>
-        <div><div class="cv-title">SO2 <!-- EDIT: full name of license --></div><div class="cv-sub">Issuing body · License no. <!-- EDIT --></div></div>
+      <div class="role">Architectural Designer / Drafting / Visualization / Project Coordination</div>
+      <div class="cv-contact">
+        <span>09935433016 / 09105766180</span>
+        <a href="mailto:nhiel.chan24@gmail.com">nhiel.chan24@gmail.com</a>
       </div>
-      <div class="cv-entry">
-        <div class="cv-date">— <!-- EDIT: year/expiry --></div>
-        <div><div class="cv-title">RMP <!-- EDIT: full name of license --></div><div class="cv-sub">Issuing body · License no. <!-- EDIT --></div></div>
+    </div>
+
+    <div class="cv-section">
+      <h3>Professional Summary</h3>
+      <p class="cv-summary">Architecture graduate and Registered Master Plumber with hands-on experience in residential and commercial projects, specializing in architectural drafting, construction documentation, site inspections, and 3D visualization. Proficient in AutoCAD, SketchUp, Lumion, D5 Render, and Adobe Photoshop.</p>
+    </div>
+
+    <div class="cv-section">
+      <h3>Skills</h3>
+      <div class="cv-skill-group">
+        <div class="cv-skill-label">Architectural Software</div>
+        <div class="cv-tags">
+          <span>AutoCAD</span><span>SketchUp</span><span>Photoshop</span><span>Lumion</span><span>D5 Render</span>
+        </div>
+      </div>
+      <div class="cv-skill-group">
+        <div class="cv-skill-label">Construction &amp; Design</div>
+        <div class="cv-tags">
+          <span>Architectural Drafting</span><span>Construction Drawings</span><span>Working Drawings</span>
+          <span>Interior Fit-Out Design</span><span>Space Planning</span><span>Residential Design</span>
+          <span>Commercial Design</span><span>Construction Detailing</span><span>Site Inspection</span>
+          <span>Project Coordination</span><span>Quantity Take-Off</span>
+        </div>
+      </div>
+      <div class="cv-skill-group">
+        <div class="cv-skill-label">Office Applications</div>
+        <div class="cv-tags">
+          <span>Microsoft Word</span><span>Microsoft PowerPoint</span><span>Microsoft Excel</span><span>Canva</span>
+        </div>
+      </div>
+      <div class="cv-skill-group">
+        <div class="cv-skill-label">Professional Skills</div>
+        <div class="cv-tags">
+          <span>Problem Solving</span><span>Time Management</span><span>Team Collaboration</span>
+          <span>Communication</span><span>Adaptability</span><span>Fast Learner</span><span>Attention to Detail</span>
+        </div>
       </div>
     </div>
 
     <div class="cv-section">
       <h3>Experience</h3>
+
       <div class="cv-entry">
-        <div class="cv-date">20XX — Present<!-- EDIT --></div>
-        <div><div class="cv-title">Job title <!-- EDIT --></div><div class="cv-sub">Company name · Location <!-- EDIT --></div>
-        <p>What you did and delivered in this role. <!-- EDIT --></p></div>
+        <div class="cv-date">2026 — Recent</div>
+        <div>
+          <div class="cv-title">Architect Intern / Project Management Architect / Designer</div>
+          <div class="cv-sub">Reyon Construction</div>
+          <ul class="cv-list">
+            <li>AFP — 7th Storey Building Interior Fit-out, Camp Aguinaldo</li>
+            <li>AFP — Modular Barracks, 2-storey</li>
+          </ul>
+        </div>
       </div>
+
       <div class="cv-entry">
-        <div class="cv-date">20XX — 20XX<!-- EDIT --></div>
-        <div><div class="cv-title">Job title <!-- EDIT --></div><div class="cv-sub">Company name · Location <!-- EDIT --></div>
-        <p>What you did and delivered in this role. <!-- EDIT --></p></div>
+        <div class="cv-date">2025 —</div>
+        <div>
+          <div class="cv-title">Architect Intern / Estimator — Residential</div>
+          <div class="cv-sub">Reyon Construction / OFB Marketing Inc.</div>
+          <ul class="cv-list">
+            <li>BOQ — San Mateo Proposed Townhouse Project (Low Cost–High End Type)</li>
+            <li>BOQ — Elvira House</li>
+            <li>BOQ — Social Hall</li>
+            <li>Cost estimation and quantity takeoffs</li>
+            <li>Developed standardized Excel estimation</li>
+            <li>BOM &amp; BOQ preparation using Excel</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-date">2024 — 2025</div>
+        <div>
+          <div class="cv-title">Architect Intern / CAD Operator / Project Management</div>
+          <div class="cv-sub">Reyon Construction</div>
+          <div class="cv-sub strong">Selected Projects</div>
+          <ul class="cv-list">
+            <li>Cathlab Interior Fit-Out — Tarlac Medical Center</li>
+            <li>West Avenue Interior Fit-Out Project</li>
+            <li>E-Games Dona Juana Studio</li>
+            <li>SPS Gym &amp; Headquarters Renovation — AFP Camp Aguinaldo</li>
+          </ul>
+          <div class="cv-sub strong">Key Achievements</div>
+          <ul class="cv-list">
+            <li>Led 4 interior fit-out and renovation projects as Project-In-Charge, overseeing planning and construction documentation.</li>
+            <li>Produced architectural drawings, floor plans, elevations, and details using AutoCAD and SketchUp.</li>
+            <li>Coordinated with architects, engineers, contractors, and clients to ensure timely project delivery.</li>
+            <li>Conducted site inspections to monitor construction progress and resolve design issues.</li>
+            <li>Developed space planning layouts and 3D visualizations using SketchUp, Lumion, and D5 Render.</li>
+            <li>Assisted in preparing construction documents and material specifications while maintaining drawing quality and project standards.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-date">2022 — 2024</div>
+        <div>
+          <div class="cv-title">Part-Time Architectural Intern</div>
+          <div class="cv-sub">Reyon Construction</div>
+          <ul class="cv-list">
+            <li>Collaborated with licensed architects on residential and commercial interior projects from design to documentation.</li>
+            <li>Produced architectural plans, detailed drawings, and presentation sketches using industry standards.</li>
+            <li>Conducted site visits to gather measurements, verify site conditions, and resolve design issues.</li>
+            <li>Assisted in preparing client presentations and accurate working drawings for project execution.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cv-entry">
+        <div class="cv-date">Oct. 2021</div>
+        <div>
+          <div class="cv-title">On-the-Job Training</div>
+          <div class="cv-sub">JJTAN Construction — SMDC Fame Residences</div>
+          <ul class="cv-list">
+            <li>Supported activities and site coordination.</li>
+            <li>Interpreted construction drawings and supported field implementation.</li>
+            <li>Gained hands-on experience in construction sequencing, quality control, and project documentation.</li>
+          </ul>
+        </div>
       </div>
     </div>
 
     <div class="cv-section">
       <h3>Education</h3>
       <div class="cv-entry">
-        <div class="cv-date">20XX<!-- EDIT --></div>
-        <div><div class="cv-title">Degree <!-- EDIT --></div><div class="cv-sub">School name <!-- EDIT --></div></div>
+        <div class="cv-date">2019 — 2024</div>
+        <div>
+          <div class="cv-title">Bachelor of Science in Architecture</div>
+          <div class="cv-sub">Eulogio “Amang” Rodriguez Institute of Science and Technology</div>
+        </div>
       </div>
     </div>
 
     <div class="cv-section">
-      <h3>Skills</h3>
-      <div class="cv-tags">
-        <span>AutoCAD<!-- EDIT --></span><span>Revit<!-- EDIT --></span><span>SketchUp<!-- EDIT --></span>
-        <span>Rendering<!-- EDIT --></span><span>BIM<!-- EDIT --></span>
+      <h3>Professional</h3>
+      <div class="cv-entry">
+        <div class="cv-date">July 2026</div>
+        <div>
+          <div class="cv-title">Registered Master Plumber (RMP)</div>
+          <div class="cv-sub">Passer — July 2026</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cv-section">
+      <h3>Seminars &amp; Training</h3>
+      <div class="cv-entry">
+        <div class="cv-date">June 11–14, 2026</div>
+        <div>
+          <div class="cv-title">OSHCA Online Training</div>
+          <div class="cv-sub">S02</div>
+        </div>
+      </div>
+      <div class="cv-entry">
+        <div class="cv-date">Oct. 15–29, 2021</div>
+        <div>
+          <div class="cv-title">AYDA Design Talks</div>
+          <div class="cv-sub">Empathy in Design · People and Technology · Culture in Architecture · Nature in Design</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cv-section">
+      <h3>Personal Data</h3>
+      <div class="cv-personal">
+        <div><span>Birth Date</span>October 24, 2000</div>
+        <div><span>Age</span>25</div>
+        <div><span>Nationality</span>Filipino</div>
+        <div><span>Gender</span>Male</div>
+      </div>
+    </div>
+
+    <div class="cv-section">
+      <h3>Reference</h3>
+      <div class="cv-entry">
+        <div class="cv-date">01</div>
+        <div>
+          <div class="cv-title">Ar. Jefrey Bolhayon UAP</div>
+          <div class="cv-sub">Architect · Reyon Construction &amp; Supply Corp. · Pasig City, NCR</div>
+          <div class="cv-sub"><a href="mailto:jefzkiebolhayon@gmail.com">jefzkiebolhayon@gmail.com</a> · 09154778718</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cv-section cv-address">
+      <h3>Contact</h3>
+      <p>B1, L5, LOREMAR HOMES, Sitio Kamatisan, Brgy. Dalig, Antipolo City</p>
+      <div class="cv-contact-grid">
+        <a href="mailto:nhiel.chan24@gmail.com">nhiel.chan24@gmail.com</a>
+        <span>DITO 09935433016 / TNT 09105766180</span>
       </div>
     </div>
   </div>
 </div>
+
 
 <section id="model" class="model">
 <div class="modelbar"><span>Interactive 3D / Portfolio Models</span><span>Powered by Sketchfab · Orbit · Zoom · Pan</span></div>
@@ -741,8 +1231,8 @@ a, .title, .meta, .hero-name, .eyebrow, .section-head h2{
     SCALE: NTS &nbsp; DWG NO: A-000
   </div>
   <div class="fnote">
-    n.fronda@example.com<!-- EDIT --><br>
-    +63 900 000 0000<!-- EDIT -->
+    nhiel.chan24@gmail.com<br>
+    +63 993 543 3016 / +63 910 576 6180
   </div>
   <div class="flinks">
     <a href="https://linkedin.com/in/nhielfronda" target="_blank" rel="noopener">LinkedIn</a>
@@ -753,36 +1243,41 @@ a, .title, .meta, .hero-name, .eyebrow, .section-head h2{
 
 
 <script>
-// Set youtube:'VIDEO_ID' per project (see setup notes at top of file).
 const PROJECTS = [
+  // ==========================================================
+  // EACH PROJECT HAS ITS OWN CANVA ARCHITECTURAL-PLANS LINK.
+  // Each project has an independent Canva link field. Replace any canva value with that project's own Canva link.
+  // ==========================================================
   {id:1,tag:'A-101',title:'Kings Forth Subdivision',type:'Subdivision Residential / Concept',year:2026,
-    media:['images/01.png','images/02.png','images/03.png','images/project-01-plan.jpg'],youtube:'https://www.youtube.com/watch?v=GggJQPRdok4'},
-  {id:2,tag:'A-102',title:'Concrete / Light',type:'Commercial / Interior',year:2025,
-    media:['images/project-02-01.jpg','images/project-02-02.jpg','images/project-02-03.jpg'],youtube:'https://youtu.be/GggJQPRdok4?si=RVLXr83C4hyEc9JC'},
-  {id:3,tag:'A-103',title:'Northline Office',type:'Workplace / Fit-out',year:2025,
-    media:['images/project-03-01.jpg','images/project-03-02.jpg','images/project-03-03.jpg'],youtube:'https://www.youtube.com/watch?v=YOUR_VIDEO_ID_03'},
+    media:['images/01.png','images/02.png','images/03.png','images/nn1.png','images/final.png'],
+    canva:'https://canva.link/94dmcnaxw44g1by'},
+
+  {id:2,tag:'A-102',title:'Coffee Shop',type:'Commercial / Interior',year:2025,
+    media:['images/c1.png','images/c2.png'],
+    canva:'https://canva.link/94dmcnaxw44g1by'},
+
+  {id:3,tag:'A-103',title:'Modular Design',type:'Workplace / Fit-out',year:2025,
+    media:['images/cab1.png','images/cab2.png','images/cab3.png'],
+    canva:'https://canva.link/94dmcnaxw44g1by'},
+
   {id:4,tag:'A-104',title:'Tropical Residence',type:'Residential / Development',year:2024,
-    media:['images/project-04-01.jpg','images/project-04-02.jpg','images/project-04-03.jpg'],youtube:'https://www.youtube.com/watch?v=YOUR_VIDEO_ID_04'},
+    media:['images/project-04-01.jpg','images/project-04-02.jpg','images/project-04-03.jpg'],
+    canva:'https://canva.link/94dmcnaxw44g1by'},
+
   {id:5,tag:'A-105',title:'Open Studio',type:'Interior / Workplace',year:2024,
-    media:['images/project-05-01.jpg','images/project-05-02.jpg','images/project-05-03.jpg'],youtube:'https://www.youtube.com/watch?v=YOUR_VIDEO_ID_05'},
+    media:['images/project-05-01.jpg','images/project-05-02.jpg','images/project-05-03.jpg'],
+    canva:'https://canva.link/94dmcnaxw44g1by'},
+
   {id:6,tag:'A-106',title:'Urban Housing',type:'Masterplan / Architecture',year:2023,
-    media:['images/project-06-01.jpg','images/project-06-02.jpg','images/project-06-03.jpg'],youtube:'https://www.youtube.com/watch?v=YOUR_VIDEO_ID_06'}
+    media:['images/project-06-01.jpg','images/project-06-02.jpg','images/project-06-03.jpg'],
+    canva:'https://canva.link/94dmcnaxw44g1by'}
 ];
 
-function getYouTubeEmbedUrl(url){
+function getCanvaEmbedUrl(url){
   try{
-    const u=new URL(url);
-    let id='';
-    if(u.hostname.includes('youtu.be')){
-      id=u.pathname.slice(1).split('/')[0];
-    }else if(u.pathname.startsWith('/shorts/')){
-      id=u.pathname.split('/')[2] || '';
-    }else if(u.pathname.startsWith('/embed/')){
-      id=u.pathname.split('/')[2] || '';
-    }else{
-      id=u.searchParams.get('v') || '';
-    }
-    return id ? `https://www.youtube.com/embed/${id}?rel=0` : '';
+    const u = new URL(url);
+    u.searchParams.set('embed','1');
+    return u.toString();
   }catch(e){
     return '';
   }
@@ -804,16 +1299,37 @@ function openProject(id){
     item.innerHTML=`<img src="${src}" alt="${p.title} image ${i+1}"><div class="media-label">Image ${String(i+1).padStart(2,'0')}</div>`;
     grid.appendChild(item);
   });
-  if(p.youtube && !p.youtube.startsWith('YOUR_VIDEO_ID')){
+
+  // Per-project Canva architectural plans — always placed LAST.
+  if(p.canva){
     const item=document.createElement('figure');
-    item.className='media-item wide';
-    item.innerHTML=`<div class="youtube-frame">
-        <iframe src="https://www.youtube.com/embed/${p.youtube}" title="${p.title} project video"
-          loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen></iframe>
-      </div><div class="media-label">Project video — YouTube</div>`;
+    item.className='media-item wide canva-project-card';
+
+    const isPlaceholder = p.canva.startsWith('PASTE_');
+    const canvaBody = isPlaceholder
+      ? `<div class="project-canva-frame">
+           <div class="pdf-empty">
+             ADD THIS PROJECT'S CANVA LINK IN THE PROJECTS ARRAY<br>
+             <span style="color:#aaa">${p.canva}</span>
+           </div>
+         </div>`
+      : `<div class="project-canva-frame">
+           <iframe src="${getCanvaEmbedUrl(p.canva)}"
+             title="${p.title} — Canva architectural plans"
+             loading="lazy"
+             allowfullscreen></iframe>
+         </div>`;
+
+    item.innerHTML=`
+      <div class="project-canva-head">
+        <span>Architectural Plans — Canva / Landscape</span>
+        ${isPlaceholder ? '' : `<a href="${p.canva}" target="_blank" rel="noopener">Open in Canva ↗</a>`}
+      </div>
+      ${canvaBody}
+      <div class="media-label">Architectural plans — Canva landscape view</div>`;
     grid.appendChild(item);
   }
+
   const modal=document.getElementById('projectModal');
   modal.classList.add('open'); modal.setAttribute('aria-hidden','false');
   document.body.style.overflow='hidden';
@@ -891,6 +1407,64 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeProject();clos
   });
 
   loadSketchfabModel(0);
+</script>
+
+<script>
+/*
+ * ==========================================================
+ * CANVA ARCHITECTURAL PLANS — ONE LINK PER PROJECT
+ * ==========================================================
+ * Each PROJECTS item has a "canva:" field.
+ * Put the Canva share/view link for THAT project there.
+ * The link is automatically embedded in landscape format
+ * at the bottom of that project's popup.
+ */
+const CANVA_PLANS = [
+  {
+    title: '01 · Site / Master Plan',
+    url: 'https://www.canva.com/design/DAHUtJ409Os/kr52CfyvQ6bXfzfct1OxQg/view'
+  },
+  {
+    title: '02 · Floor Plans',
+    url: 'https://www.canva.com/design/DAHUtJ409Os/kr52CfyvQ6bXfzfct1OxQg/view'
+  },
+  {
+    title: '03 · Elevations / Sections',
+    url: 'https://www.canva.com/design/DAHUtJ409Os/kr52CfyvQ6bXfzfct1OxQg/view'
+  }
+];
+
+const canvaViewer = document.getElementById('canvaViewer');
+const canvaPlanName = document.getElementById('canvaPlanName');
+const canvaOpenLink = document.getElementById('canvaOpenLink');
+const canvaTabs = document.querySelectorAll('.canva-tab');
+
+function canvaEmbedUrl(url){
+  return url.replace(/\/?$/, '') + '?embed';
+}
+
+function loadCanvaPlan(index){
+  const plan = CANVA_PLANS[index];
+  if(!plan) return;
+
+  canvaPlanName.textContent = plan.title;
+  canvaOpenLink.href = plan.url;
+  canvaViewer.src = canvaEmbedUrl(plan.url);
+
+  canvaTabs.forEach((tab,i)=>{
+    const active = i === index;
+    tab.classList.toggle('active', active);
+    tab.setAttribute('aria-selected', active ? 'true' : 'false');
+  });
+}
+
+canvaTabs.forEach(tab=>{
+  tab.addEventListener('click', ()=>{
+    loadCanvaPlan(Number(tab.dataset.plan));
+  });
+});
+
+loadCanvaPlan(0);
 </script>
 </body>
 </html>
