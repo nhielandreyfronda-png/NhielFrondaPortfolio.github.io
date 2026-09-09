@@ -145,29 +145,6 @@ footer .flinks a:hover{color:var(--fg)}
 .media-item img{width:100%;display:block;max-height:78vh;object-fit:cover}
 .media-item.wide{grid-column:1/-1}
 
-.project-canva-card{background:#111}
-.project-canva-head{
-  display:flex;justify-content:space-between;align-items:center;gap:14px;
-  padding:11px 13px;border-bottom:1px solid var(--line);
-  font-family:'JetBrains Mono',monospace;font-size:9px;
-  text-transform:uppercase;letter-spacing:.06em;color:var(--muted);
-}
-.project-canva-head a{color:var(--fg);white-space:nowrap}
-.project-canva-head a:hover{color:var(--accent)}
-.project-canva-frame{
-  width:100%;
-  aspect-ratio:16/9;
-  background:#666;
-  padding:8px;
-  overflow:hidden;
-}
-.project-canva-frame iframe{
-  width:100%;height:100%;display:block;border:0;background:#fff;
-}
-@media(max-width:750px){
-  .project-canva-head{align-items:flex-start;flex-direction:column;gap:8px}
-  .project-canva-frame{aspect-ratio:16/9;padding:4px}
-}
 .media-label{padding:9px 12px;font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);background:var(--panel);border-top:1px solid var(--line)}
 .video-card{position:relative;display:block}
 .video-card img{filter:brightness(.72)}
@@ -905,10 +882,10 @@ a, .title, .meta, .hero-name, .eyebrow, .section-head h2{
 <section class="profile-links">
   <div class="profile-links-label">Profiles / Online Work</div>
   <div class="profile-links-list">
-    <a href="https://linkedin.com/in/nhielfronda" target="_blank" rel="noopener">
+    <a href="https://www.linkedin.com/in/nhiel-andrey-fronda-786a81248/" target="_blank" rel="noopener">
       <span>LinkedIn</span><small>Professional profile</small>
     </a>
-    <a href="https://instagram.com/nhielfronda" target="_blank" rel="noopener">
+    <a href="https://www.instagram.com/yoichi.nhl/?hl=en" target="_blank" rel="noopener">
       <span>Instagram</span><small>Visual work</small>
     </a>
   </div>
@@ -1235,8 +1212,8 @@ a, .title, .meta, .hero-name, .eyebrow, .section-head h2{
     +63 993 543 3016 / +63 910 576 6180
   </div>
   <div class="flinks">
-    <a href="https://linkedin.com/in/nhielfronda" target="_blank" rel="noopener">LinkedIn</a>
-    <a href="https://instagram.com/nhielfronda" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.linkedin.com/in/nhiel-andrey-fronda-786a81248/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://www.instagram.com/yoichi.nhl/?hl=en" target="_blank" rel="noopener">Instagram</a>
   </div>
 </footer>
 </div>
@@ -1244,33 +1221,23 @@ a, .title, .meta, .hero-name, .eyebrow, .section-head h2{
 
 <script>
 const PROJECTS = [
-  // ==========================================================
-  // EACH PROJECT HAS ITS OWN CANVA ARCHITECTURAL-PLANS LINK.
-  // Each project has an independent Canva link field. Replace any canva value with that project's own Canva link.
-  // ==========================================================
   {id:1,tag:'A-101',title:'Kings Forth Subdivision',type:'Subdivision Residential / Concept',year:2026,
-    media:['images/01.png','images/02.png','images/03.png','images/nn1.png','images/final.png'],
-    canva:'https://canva.link/94dmcnaxw44g1by'},
+    media:['images/01.png','images/02.png','images/03.png','images/nn1.png','images/final.png']},
 
   {id:2,tag:'A-102',title:'Coffee Shop',type:'Commercial / Interior',year:2025,
-    media:['images/c1.png','images/c2.png'],
-    canva:'https://canva.link/94dmcnaxw44g1by'},
+    media:['images/c1.png','images/c2.png']},
 
   {id:3,tag:'A-103',title:'Modular Design',type:'Workplace / Fit-out',year:2025,
-    media:['images/cab1.png','images/cab2.png','images/cab3.png'],
-    canva:'https://canva.link/94dmcnaxw44g1by'},
+    media:['images/cab1.png','images/cab2.png','images/cab3.png']},
 
   {id:4,tag:'A-104',title:'Tropical Residence',type:'Residential / Development',year:2024,
-    media:['images/project-04-01.jpg','images/project-04-02.jpg','images/project-04-03.jpg'],
-    canva:'https://canva.link/94dmcnaxw44g1by'},
+    media:['images/project-04-01.jpg','images/project-04-02.jpg','images/project-04-03.jpg']},
 
   {id:5,tag:'A-105',title:'Open Studio',type:'Interior / Workplace',year:2024,
-    media:['images/project-05-01.jpg','images/project-05-02.jpg','images/project-05-03.jpg'],
-    canva:'https://canva.link/94dmcnaxw44g1by'},
+    media:['images/project-05-01.jpg','images/project-05-02.jpg','images/project-05-03.jpg']},
 
   {id:6,tag:'A-106',title:'Urban Housing',type:'Masterplan / Architecture',year:2023,
-    media:['images/project-06-01.jpg','images/project-06-02.jpg','images/project-06-03.jpg'],
-    canva:'https://canva.link/94dmcnaxw44g1by'}
+    media:['images/project-06-01.jpg','images/project-06-02.jpg','images/project-06-03.jpg']}
 ];
 
 function getCanvaEmbedUrl(url){
@@ -1300,35 +1267,6 @@ function openProject(id){
     grid.appendChild(item);
   });
 
-  // Per-project Canva architectural plans — always placed LAST.
-  if(p.canva){
-    const item=document.createElement('figure');
-    item.className='media-item wide canva-project-card';
-
-    const isPlaceholder = p.canva.startsWith('PASTE_');
-    const canvaBody = isPlaceholder
-      ? `<div class="project-canva-frame">
-           <div class="pdf-empty">
-             ADD THIS PROJECT'S CANVA LINK IN THE PROJECTS ARRAY<br>
-             <span style="color:#aaa">${p.canva}</span>
-           </div>
-         </div>`
-      : `<div class="project-canva-frame">
-           <iframe src="${getCanvaEmbedUrl(p.canva)}"
-             title="${p.title} — Canva architectural plans"
-             loading="lazy"
-             allowfullscreen></iframe>
-         </div>`;
-
-    item.innerHTML=`
-      <div class="project-canva-head">
-        <span>Architectural Plans — Canva / Landscape</span>
-        ${isPlaceholder ? '' : `<a href="${p.canva}" target="_blank" rel="noopener">Open in Canva ↗</a>`}
-      </div>
-      ${canvaBody}
-      <div class="media-label">Architectural plans — Canva landscape view</div>`;
-    grid.appendChild(item);
-  }
 
   const modal=document.getElementById('projectModal');
   modal.classList.add('open'); modal.setAttribute('aria-hidden','false');
@@ -1414,7 +1352,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeProject();clos
  * ==========================================================
  * CANVA ARCHITECTURAL PLANS — ONE LINK PER PROJECT
  * ==========================================================
- * Each PROJECTS item has a "canva:" field.
+ * Canva is shown only in the Architectural Plans section.
  * Put the Canva share/view link for THAT project there.
  * The link is automatically embedded in landscape format
  * at the bottom of that project's popup.
