@@ -1,0 +1,896 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nhiel Andrey T. Fronda, SO2, RMP — Architectural Product Designer</title>
+<meta name="description" content="Architectural product design portfolio of Nhiel Andrey T. Fronda, SO2, RMP.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --accent:#c7b79a;
+  --accent-bright:#e2d4b8;
+  --bg:#050505;
+  --panel:#0d0d0d;
+  --fg:#f5f5f5;
+  --muted:#8a8a8a;
+  --line:#242424;
+  --grid:#0b0b0b;
+  --ink:#ffffff;
+  --redline:#ffffff;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:'Manrope',Arial,sans-serif;letter-spacing:-.01em;}
+a{color:inherit;text-decoration:none}
+.mono{font-family:'JetBrains Mono',ui-monospace,Menlo,monospace}
+.wrap{width:min(1180px,92vw);margin:auto}
+
+/* ---- reusable AutoCAD-style dimension arrow ---- */
+.arrow-icon{width:26px;height:9px;display:inline-block;vertical-align:middle;color:currentColor;flex:none}
+.arrow-link{display:inline-flex;align-items:center;gap:9px;cursor:pointer}
+.arrow-link .arrow-icon path,.arrow-link .arrow-icon line{transition:transform .25s ease}
+.arrow-link:hover .arrow-icon{transform:translateX(4px)}
+
+header{height:84px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
+.logo{font-family:'JetBrains Mono',monospace;font-weight:500;letter-spacing:.06em;font-size:13px}
+.logo span{color:var(--muted)}
+.nav{display:flex;gap:26px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.04em;color:var(--muted)}
+.nav a:hover{color:var(--fg)}
+
+/* ---- profile photo card ---- */
+.profile{border-bottom:1px solid var(--line);padding:40px 0 34px;position:relative}
+.profile-card{position:relative;width:30%;aspect-ratio:1/1;border:1px solid var(--line);overflow:hidden;background:var(--panel)}
+.avatar-fallback{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:var(--muted)}
+.avatar-fallback svg{width:44px;height:44px;stroke:var(--muted);fill:none;stroke-width:1.1}
+.avatar-fallback .a-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-align:center}
+.avatar-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:none}
+.card-overlay{position:absolute;inset:0;display:flex;align-items:flex-end;
+  background:linear-gradient(0deg,rgba(6,7,7,.92) 0%,rgba(6,7,7,.45) 42%,rgba(6,7,7,0) 75%);padding:34px}
+.card-name h1{margin:0 0 8px;font-size:clamp(28px,4.4vw,52px);font-weight:500;line-height:1.02;color:var(--fg)}
+.card-name .cred{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--fg);margin-bottom:8px}
+.card-name .role{font-size:14px;color:#c7c6c0}
+.stamp{position:absolute;right:24px;top:24px;z-index:2;border:2px solid var(--redline);color:var(--redline);
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;padding:6px 10px;
+  transform:rotate(-7deg);opacity:.85;background:rgba(6,7,7,.55);pointer-events:none}
+
+/* ---- contact row (below the photo card) ---- */
+.contact-row{display:flex;justify-content:flex-end;align-items:center;flex-wrap:wrap;gap:28px;
+  margin-top:22px;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--muted)}
+.contact-row .cdata{display:flex;justify-content:flex-end;gap:22px;flex-wrap:wrap;text-align:right}
+.contact-row .cdata div span{display:block;font-size:8px;letter-spacing:.1em;color:#666;margin-bottom:4px;text-transform:uppercase}
+.contact-row a:hover{color:var(--fg)}
+.contact-row .clinks{display:flex;gap:18px;align-items:center;justify-content:flex-end;flex-wrap:wrap}
+.cv-btn{border:1px solid var(--line);padding:9px 14px;color:var(--fg)}
+.cv-btn:hover{border-color:var(--fg);color:var(--fg)}
+
+.hero{padding:100px 0 120px;display:grid;grid-template-columns:1.5fr 1fr;gap:8vw}
+.eyebrow{font-family:'JetBrains Mono',monospace;text-transform:uppercase;font-size:10.5px;letter-spacing:.1em;color:var(--muted);margin-bottom:22px}
+h1{font-size:clamp(46px,7.5vw,102px);line-height:.88;margin:0;font-weight:500}
+.hero p{max-width:420px;font-size:17px;line-height:1.55;margin-top:26px;color:#c7c6c0}
+.hero-mark{align-self:end;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.04em;color:var(--muted);line-height:1.8;border-left:1px solid var(--line);padding-left:18px}
+
+.section-head{display:flex;justify-content:space-between;align-items:end;border-top:1px solid var(--line);padding:20px 0 32px}
+.section-head h2{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.1em;margin:0;color:var(--muted)}
+.section-head span{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)}
+
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:54px 24px;padding-bottom:120px}
+.project{cursor:crosshair}
+.thumb{position:relative;overflow:hidden;background:var(--panel);aspect-ratio:16/10;border:1px solid var(--line)}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block;
+  filter:grayscale(100%);
+  transition:filter .35s ease,transform .6s ease}
+.project:hover .thumb img{filter:grayscale(0%);transform:scale(1.025)}
+.project.is-color img{filter:grayscale(0%)}
+.sheet-tag{position:absolute;left:12px;top:12px;background:rgba(10,10,10,.8);border:1px solid var(--line);
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.06em;padding:5px 8px;color:var(--fg)}
+.open-hint{position:absolute;right:12px;bottom:12px;background:rgba(10,10,10,.82);padding:6px 9px;
+  font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.06em;color:var(--fg)}
+.info{display:grid;grid-template-columns:1fr auto;gap:10px;margin-top:12px;font-size:12px}
+.info .title{font-size:15px}
+.meta{font-family:'JetBrains Mono',monospace;color:var(--muted);text-align:right;font-size:11px}
+
+.about{display:grid;grid-template-columns:1fr 1fr;gap:10vw;border-top:1px solid var(--line);padding:26px 0 120px}
+.about h2{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+.about p{font-size:23px;line-height:1.3;margin:0;max-width:600px;color:#d8d7d1}
+
+.model{border-top:1px solid var(--line);padding:26px 0 120px}
+.modelbar{display:flex;justify-content:space-between;margin-bottom:18px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)}
+#viewer{height:580px;background:var(--panel);position:relative;overflow:hidden;border:1px solid var(--line)}
+.model-note{position:absolute;left:16px;bottom:16px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.06em;color:var(--muted);z-index:2}
+.compass{position:absolute;right:16px;top:16px;z-index:2;display:flex;flex-direction:column;align-items:center;color:var(--muted)}
+.compass svg{width:22px;height:22px}
+.compass span{font-family:'JetBrains Mono',monospace;font-size:9px;margin-top:2px}
+
+footer{border-top:1px solid var(--line);padding:28px 0 50px;display:grid;grid-template-columns:1fr auto auto;gap:24px;
+  font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--muted);align-items:end}
+footer .fnote{line-height:1.8}
+footer .flinks{display:flex;gap:16px;justify-content:flex-end}
+footer .flinks a:hover{color:var(--fg)}
+
+@media(max-width:750px){
+  .hero{grid-template-columns:1fr;padding:70px 0}
+  .grid,.about{grid-template-columns:1fr}
+  .grid{gap:40px;padding-bottom:80px}
+  .about{padding-bottom:80px}
+  .about p{font-size:20px}
+  .nav{gap:12px}
+  #viewer{height:420px}
+  .profile-card{min-height:0;padding:58px 22px 28px;flex-direction:column;align-items:stretch;gap:28px}
+  .avatar-img,.avatar-fallback{order:1;align-self:center;width:min(100%,220px);flex-basis:auto}
+  .card-overlay{order:2;padding:0}
+  .card-name h1{font-size:clamp(38px,11vw,58px)}
+  .stamp{right:14px;top:14px}
+  .contact-row{flex-direction:column;align-items:flex-end}
+  .contact-row .cdata{gap:16px;justify-content:flex-end}
+  .stamp{right:14px;top:14px;font-size:8px}
+  footer{grid-template-columns:1fr;text-align:left;gap:10px}
+  footer .flinks{justify-content:flex-start}
+}
+
+.modal{display:none;position:fixed;inset:0;z-index:50;background:var(--bg);overflow:auto}
+.modal.open{display:block}
+.modal-top{position:sticky;top:0;z-index:5;height:74px;border-bottom:1px solid var(--line);background:rgba(10,10,10,.95);
+  backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:space-between;padding:0 4vw;
+  font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;color:var(--muted)}
+.modal-top button{border:0;background:none;font:inherit;text-transform:uppercase;cursor:pointer;padding:12px;color:var(--fg)}
+.modal-content{width:min(1180px,92vw);margin:auto;padding:50px 0 100px}
+.modal-intro{display:grid;grid-template-columns:1fr auto;align-items:end;border-bottom:1px solid var(--line);padding-bottom:26px;margin-bottom:22px}
+.modal-intro h2{font-size:clamp(34px,5.5vw,70px);font-weight:500;line-height:.9;margin:0}
+.modal-year{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted)}
+.media-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.media-item{margin:0;background:var(--panel);overflow:hidden;border:1px solid var(--line)}
+.media-item img{width:100%;display:block;max-height:78vh;object-fit:cover}
+.media-item.wide{grid-column:1/-1}
+.media-label{padding:9px 12px;font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);background:var(--panel);border-top:1px solid var(--line)}
+.video-card{position:relative;display:block}
+.video-card img{filter:brightness(.72)}
+.video-card .play{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px}
+.video-card .play-badge{width:56px;height:56px;border:1px solid var(--ink);border-radius:50%;display:flex;align-items:center;justify-content:center}
+.video-card .play-badge svg{width:16px;height:16px;fill:var(--fg)}
+.video-card .play-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;color:var(--fg);display:flex;align-items:center;gap:8px}
+@media(max-width:750px){.media-grid{grid-template-columns:1fr}.media-item.wide{grid-column:auto}.modal-content{padding-top:32px}.modal-intro{grid-template-columns:1fr auto}}
+
+/* ---- CV (viewable resume) ---- */
+.cv-content{width:min(880px,92vw);margin:auto;padding:50px 0 100px}
+.cv-head{border-bottom:1px solid var(--line);padding-bottom:24px;margin-bottom:34px}
+.cv-head h2{font-size:clamp(30px,4.5vw,48px);font-weight:500;margin:0 0 8px}
+.cv-head .cred{font-family:'JetBrains Mono',monospace;color:var(--fg);font-size:13px;margin-bottom:6px}
+.cv-head .role{color:var(--muted);font-size:13px}
+.cv-section{border-top:1px solid var(--line);padding:26px 0}
+.cv-section h3{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin:0 0 18px}
+.cv-entry{display:grid;grid-template-columns:140px 1fr;gap:18px;margin-bottom:18px}
+.cv-entry:last-child{margin-bottom:0}
+.cv-entry .cv-date{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)}
+.cv-entry .cv-title{font-size:15px;margin-bottom:3px}
+.cv-entry .cv-sub{font-size:12.5px;color:var(--muted);margin-bottom:6px}
+.cv-entry p{margin:0;font-size:13px;line-height:1.6;color:#c7c6c0;max-width:60ch}
+.cv-tags{display:flex;flex-wrap:wrap;gap:8px}
+.cv-tags span{font-family:'JetBrains Mono',monospace;font-size:10.5px;border:1px solid var(--line);padding:5px 9px;color:var(--muted)}
+@media(max-width:600px){.cv-entry{grid-template-columns:1fr}}
+
+/* ARCHITECTURAL PORTFOLIO REFINEMENT */
+:root{--bg:#090909;--panel:#111;--fg:#f2f2f0;--muted:#969696;--line:#292929}
+body{background:var(--bg);color:var(--fg)}
+.wrap{width:min(1240px,90vw)}
+header{height:72px}
+.logo{font-size:11px;letter-spacing:.08em}
+.nav{font-size:10px;gap:24px}
+.profile{padding:28px 0 24px}
+.profile-card{width:min(210px,25vw);aspect-ratio:4/5;border-color:#303030}
+.avatar-img{filter:none;object-fit:cover}
+.card-overlay{background:linear-gradient(0deg,rgba(0,0,0,.65),rgba(0,0,0,0) 65%);padding:14px}
+.card-name h1{font-size:17px;line-height:1.1;letter-spacing:-.02em;margin:0 0 5px}
+.card-name .cred{font-size:9px;margin-bottom:3px}
+.card-name .role{font-size:9px;color:#d0d0d0}
+.stamp{right:12px;top:12px;font-size:7px;padding:4px 6px;border-width:1px}
+.contact-row{margin-top:18px;font-size:10px}
+.contact-row .cdata{gap:22px}
+.contact-row .cdata div span{font-size:8px}
+.cv-btn{padding:7px 11px}
+.hero{padding:110px 0 125px;grid-template-columns:1.7fr .8fr;gap:10vw}
+.eyebrow{font-size:9px;margin-bottom:20px}
+.hero h1{font-size:clamp(54px,8vw,104px);letter-spacing:-.055em}
+.hero p{font-size:15px;max-width:470px;color:#bdbdb9}
+.hero-mark{font-size:10px}
+.section-head{padding:16px 0 24px}
+.section-head h2{font-size:10px}
+.grid{gap:68px 28px;padding-bottom:125px}
+.thumb{aspect-ratio:16/10;border-color:#303030}
+.thumb img{filter:grayscale(100%);transition:filter .35s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.sheet-tag,.open-hint{font-size:8px;padding:4px 7px}
+.info{margin-top:13px}
+.info .title{font-size:14px}
+.meta{font-size:9px}
+.about{padding:28px 0 125px;gap:12vw}
+.about p{font-size:21px;max-width:560px;color:#ccc}
+.model{padding:28px 0 125px}
+#viewer{height:560px}
+.sketchfab-viewer{
+  height:560px;
+  background:#050505;
+  position:relative;
+  overflow:hidden;
+  border:1px solid var(--line);
+}
+.sketchfab-viewer iframe{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border:0;
+  display:block;
+}
+.sketchfab-viewer .model-note{
+  pointer-events:none;
+  background:rgba(5,5,5,.72);
+  padding:7px 10px;
+  border:1px solid rgba(255,255,255,.08);
+  backdrop-filter:blur(4px);
+}
+@media(max-width:750px){
+  .sketchfab-viewer{height:420px}
+}
+
+footer{padding:25px 0 45px;font-size:9px}
+.modal-top{height:66px;font-size:10px}
+.modal-content{padding:42px 0 90px}
+.modal-intro h2{font-size:clamp(32px,5vw,66px)}
+@media(max-width:750px){
+ .profile-card{width:150px}
+ .hero{padding:75px 0 90px}
+ .hero h1{font-size:clamp(48px,14vw,78px)}
+ .grid{gap:42px;padding-bottom:85px}
+ #viewer{height:420px}
+}
+
+
+/* ---- refined hero portrait ---- */
+.hero{padding:92px 0 110px;display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:7vw;align-items:center}
+.hero-copy{min-width:0}
+.hero-copy .hero-mark{margin-top:34px}
+.hero-portrait{width:100%;justify-self:end}
+.portrait-frame{position:relative;width:100%;aspect-ratio:4/5;border:1px solid var(--line);background:var(--panel);overflow:hidden}
+.portrait-frame img{width:100%;height:100%;object-fit:cover;display:block;filter:none}
+.portrait-fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;font-family:'JetBrains Mono',monospace;font-size:9px;line-height:1.7;letter-spacing:.08em;color:var(--muted)}
+.portrait-caption{display:flex;justify-content:space-between;gap:14px;margin-top:11px;font-family:'JetBrains Mono',monospace;font-size:8px;line-height:1.5;letter-spacing:.06em;color:var(--muted)}
+.portrait-caption span:last-child{text-align:right}
+@media(max-width:750px){
+  .hero{grid-template-columns:1fr;padding:70px 0 80px;gap:38px}
+  .hero-portrait{width:min(220px,62vw);justify-self:start;order:-1}
+  .portrait-caption{display:block}
+  .portrait-caption span{display:block}
+  .portrait-caption span:last-child{text-align:left;margin-top:3px}
+}
+
+/* ---- name emphasis + outer portrait border ---- */
+.hero-name{
+  margin-top:30px;
+  font-size:clamp(24px,3.1vw,42px);
+  line-height:1;
+  font-weight:700;
+  letter-spacing:-.035em;
+  color:#fff;
+  max-width:720px;
+}
+.hero-credentials{
+  margin-top:8px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;
+  letter-spacing:.12em;
+  color:#f5f5f5;
+}
+.hero-portrait{
+  padding:9px;
+  border:1px solid #3a3a3a;
+  outline:1px solid #181818;
+  outline-offset:5px;
+}
+.hero-portrait .portrait-frame{
+  border-color:#303030;
+}
+
+/* ---- profile links above selected projects ---- */
+.profile-links{
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  padding:18px 0 22px;
+  margin-bottom:42px;
+  display:grid;
+  grid-template-columns:180px 1fr;
+  gap:30px;
+  align-items:center;
+}
+.profile-links-label{
+  font-family:'JetBrains Mono',monospace;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  font-size:9px;
+  color:var(--muted);
+}
+.profile-links-list{
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.profile-links-list a{
+  min-width:150px;
+  padding:11px 13px;
+  border:0;
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+  transition:border-color .2s ease, background .2s ease;
+}
+.profile-links-list a:hover{
+  border-color:transparent;
+  background:#0d0d0d;
+}
+.profile-links-list span{
+  font-size:12px;
+  color:#fff;
+  font-weight:500;
+}
+.profile-links-list small{
+  font-family:'JetBrains Mono',monospace;
+  font-size:8px;
+  color:var(--muted);
+  letter-spacing:.04em;
+}
+@media(max-width:750px){
+  .profile-links{
+    grid-template-columns:1fr;
+    gap:14px;
+    margin-bottom:34px;
+  }
+  .profile-links-list{
+    justify-content:flex-start;
+  }
+  .profile-links-list a{
+    flex:1 1 130px;
+    min-width:0;
+  }
+}
+
+.youtube-frame{
+  position:relative;
+  width:100%;
+  aspect-ratio:16/9;
+  background:#080808;
+}
+.youtube-frame iframe{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border:0;
+  display:block;
+}
+
+/* ---- minimalist typography + warm architectural accent ---- */
+body{font-weight:500}
+h1,h2,.hero-name,.card-name h1,.modal-intro h2,.cv-head h2{font-weight:700}
+.hero-name,.card-name h1{color:#fff}
+.hero p,.about p,.cv-entry p{font-weight:500}
+.nav a,.contact-row a,.profile-links-list a,.flinks a{
+  transition:color .2s ease,background-size .2s ease;
+  background-image:linear-gradient(var(--accent),var(--accent));
+  background-repeat:no-repeat;
+  background-position:0 100%;
+  background-size:0 2px;
+}
+.nav a:hover,.contact-row a:hover,.profile-links-list a:hover,.flinks a:hover{
+  color:var(--accent-bright);
+  background-size:100% 2px;
+}
+.profile-links-list span{font-weight:700}
+.section-head h2,.eyebrow,.profile-links-label{color:var(--accent)}
+.sheet-tag{color:var(--accent)}
+.info .title{font-weight:700}
+.meta,.contact-row,.hero-mark,.portrait-caption,.modelbar,.cv-section h3,.cv-entry .cv-date{
+  color:#9d9a92;
+}
+.cv-tags span{transition:color .2s ease,border-color .2s ease,background .2s ease}
+.cv-tags span:hover{
+  color:#111;
+  background:var(--accent);
+  border-color:var(--accent);
+}
+.cv-btn:hover{
+  border-color:var(--accent);
+  color:var(--accent);
+}
+
+/* ---- stronger typography + text-touch highlight ---- */
+body{font-weight:600}
+.hero h1{
+  font-size:clamp(58px,9vw,128px);
+  font-weight:800;
+  letter-spacing:-.055em;
+  line-height:.84;
+}
+.hero-name{
+  font-size:clamp(30px,4vw,54px);
+  font-weight:800;
+  letter-spacing:-.045em;
+}
+.hero p{
+  font-size:18px;
+  font-weight:600;
+}
+.section-head h2{
+  font-size:13px;
+  font-weight:700;
+}
+.info .title{
+  font-size:18px;
+  font-weight:800;
+}
+.about p{
+  font-size:26px;
+  font-weight:600;
+}
+.card-name h1{
+  font-weight:800;
+}
+.nav{
+  font-size:12px;
+  font-weight:600;
+}
+.profile-links-list span{
+  font-size:14px;
+  font-weight:800;
+}
+
+/* Highlight the actual text area when the pointer touches it */
+.nav a:hover,
+.contact-row a:hover,
+.profile-links-list a:hover span,
+.flLinks a:hover,
+.flLinks a:hover,
+.flLinks a:hover,
+footer .flinks a:hover,
+.cv-btn:hover,
+.project:hover .title,
+.project:hover .meta,
+.section-head h2:hover,
+.eyebrow:hover,
+.hero-name:hover,
+.info .title:hover{
+  color:#111 !important;
+  background:var(--accent);
+  box-decoration-break:clone;
+  -webkit-box-decoration-break:clone;
+  padding:2px 5px;
+  margin-left:-5px;
+  margin-right:-5px;
+}
+
+/* Smoothly brighten all interactive text before highlight */
+a, .title, .meta, .hero-name, .eyebrow, .section-head h2{
+  transition:color .18s ease, background .18s ease, transform .18s ease;
+}
+
+/* Keep project card itself clean; only its text highlights */
+.project:hover .thumb img{transform:scale(1.025)}
+
+@media(max-width:750px){
+  .hero h1{font-size:clamp(52px,14vw,92px)}
+  .hero-name{font-size:clamp(27px,7vw,42px)}
+  .about p{font-size:22px}
+}
+
+.video-section{
+  margin-top:34px;
+  border-top:1px solid var(--line);
+  padding-top:18px;
+}
+.video-section-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:12px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:var(--muted);
+}
+.video-section-head a{
+  color:var(--fg);
+  text-decoration:none;
+}
+.video-section-head a:hover{color:var(--accent-bright)}
+.youtube-frame{
+  position:relative;
+  width:100%;
+  aspect-ratio:16/9;
+  background:#080808;
+  overflow:hidden;
+}
+.youtube-frame iframe{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border:0;
+  display:block;
+}
+
+
+/* ---- multiple Sketchfab models / tab switcher ---- */
+.sketchfab-tabs{display:flex;gap:0;overflow-x:auto;margin-bottom:12px;border-bottom:1px solid var(--line);scrollbar-width:thin}
+.sketchfab-tab{appearance:none;border:0;background:transparent;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.05em;padding:12px 16px;cursor:pointer;white-space:nowrap;transition:color .2s ease,background .2s ease}
+.sketchfab-tab:hover{color:var(--fg);background:#111}
+.sketchfab-tab.active{color:#111;background:var(--accent);font-weight:700}
+.sketchfab-tab:focus-visible{outline:1px solid var(--accent);outline-offset:-2px}
+@media(max-width:750px){.sketchfab-tab{padding:12px 13px;font-size:9px}}
+</style>
+</head>
+<body>
+<!--
+========================================================================
+ SETUP NOTES — replace the placeholders below before publishing
+========================================================================
+ 1) PROFILE PHOTO
+    Save a photo as: images/profile.jpg
+    Until that file exists, a dashed placeholder box is shown instead.
+
+ 2) CONTACT INFO
+    Edit the email, phone and links inside the <div class="profile"> block
+    and again in the <footer> at the bottom of this file.
+
+ 3) PROJECT IMAGES
+    Create these folders beside index.html: images/  videos/(optional)
+    Use the filenames listed in the PROJECTS array near the bottom script.
+
+ 4) PROJECT VIDEOS (YouTube)
+    In the PROJECTS array, replace each youtube URL with your full YouTube link
+    for example: 'https://www.youtube.com/watch?v=XXXXXXXXXXX'.
+    Leave it as '' if a project has no video yet.
+========================================================================
+-->
+
+<!-- reusable AutoCAD-style dimension arrow (thin line + closed triangular head) -->
+<svg style="position:absolute;width:0;height:0" aria-hidden="true">
+  <symbol id="cadArrow" viewBox="0 0 40 10">
+    <line x1="0" y1="5" x2="27" y2="5" stroke="currentColor" stroke-width="1"></line>
+    <path d="M27 0.5 L39 5 L27 9.5 Z" fill="currentColor"></path>
+  </symbol>
+</svg>
+
+<div class="wrap">
+<header>
+  <a class="logo">N.A.T.F<span> / ARCH</span></a>
+  <nav class="nav"><a href="#work">Work</a><a href="#model">Model</a><a href="#about">About</a><a onclick="openCV()">CV</a><a href="#contact">Contact</a></nav>
+</header>
+
+<section class="hero">
+<div class="hero-copy">
+  <div class="eyebrow">Architectural Product Designer / Portfolio 2026</div>
+  <h1>Space,<br>product,<br>precision.</h1>
+  <div class="hero-name">NHIEL ANDREY T. FRONDA</div>
+  <div class="hero-credentials">SO2, RMP</div>
+  <p>A portfolio of architectural design work — how ideas become drawings, details, systems and built experiences.</p>
+  <div class="hero-mark">Selected works<br>Architecture / Interiors<br>Product / BIM / Visualization</div>
+</div>
+<div class="hero-portrait">
+  <div class="portrait-frame">
+    <img src="images/profile.jpg" alt="Nhiel Andrey T. Fronda" onerror="this.style.display='none'">
+    <div class="portrait-fallback"></div>
+  </div>
+  <div class="portrait-caption">
+    <span>NHIEL ANDREY T. FRONDA</span>
+    <span>SO2, RMP / ARCHITECTURAL VISUALIZATION</span>
+  </div>
+</div>
+</section>
+
+<section class="profile-links">
+  <div class="profile-links-label">Profiles / Online Work</div>
+  <div class="profile-links-list">
+    <a href="https://linkedin.com/in/nhielfronda" target="_blank" rel="noopener">
+      <span>LinkedIn</span><small>Professional profile</small>
+    </a>
+    <a href="https://instagram.com/nhielfronda" target="_blank" rel="noopener">
+      <span>Instagram</span><small>Visual work</small>
+    </a>
+  </div>
+</section>
+
+<section id="work">
+<div class="section-head"><h2>Selected projects</h2><span>Drawing set A-101—A-106</span></div>
+<div class="grid">
+<article class="project" onclick="openProject(1)">
+  <div class="thumb"><img src="images/01.png" alt="Kings Forth Subdivision"><div class="sheet-tag">A-101</div><div class="open-hint">Click image → view project</div></div>
+  <div class="info"><div><div class="title">Kings Forth Subdivision</div><div class="meta" style="text-align:left">Residential Subdivision / Concept</div></div><div class="meta">2026</div></div>
+</article>
+<article class="project" onclick="openProject(2)">
+  <div class="thumb"><img src="images/project-02-01.jpg" alt="Concrete / Light"><div class="sheet-tag">A-102</div><div class="open-hint">Open project</div></div>
+  <div class="info"><div><div class="title">Concrete / Light</div><div class="meta" style="text-align:left">Commercial / Interior</div></div><div class="meta">2025</div></div>
+</article>
+<article class="project" onclick="openProject(3)">
+  <div class="thumb"><img src="images/project-03-01.jpg" alt="Northline Office"><div class="sheet-tag">A-103</div><div class="open-hint">Open project</div></div>
+  <div class="info"><div><div class="title">Northline Office</div><div class="meta" style="text-align:left">Workplace / Fit-out</div></div><div class="meta">2025</div></div>
+</article>
+<article class="project" onclick="openProject(4)">
+  <div class="thumb"><img src="images/project-04-01.jpg" alt="Tropical Residence"><div class="sheet-tag">A-104</div><div class="open-hint">Open project</div></div>
+  <div class="info"><div><div class="title">Tropical Residence</div><div class="meta" style="text-align:left">Residential / Development</div></div><div class="meta">2024</div></div>
+</article>
+<article class="project" onclick="openProject(5)">
+  <div class="thumb"><img src="images/project-05-01.jpg" alt="Open Studio"><div class="sheet-tag">A-105</div><div class="open-hint">Open project</div></div>
+  <div class="info"><div><div class="title">Open Studio</div><div class="meta" style="text-align:left">Interior / Workplace</div></div><div class="meta">2024</div></div>
+</article>
+<article class="project" onclick="openProject(6)">
+  <div class="thumb"><img src="images/project-06-01.jpg" alt="Urban Housing"><div class="sheet-tag">A-106</div><div class="open-hint">Open project</div></div>
+  <div class="info"><div><div class="title">Urban Housing</div><div class="meta" style="text-align:left">Masterplan / Architecture</div></div><div class="meta">2023</div></div>
+</article>
+</div></section>
+
+<div id="projectModal" class="modal" aria-hidden="true">
+  <div class="modal-top">
+    <div><span id="modalNumber" class="mono">A-101</span> / <span id="modalTitle">Project</span></div>
+    <button onclick="closeProject()" aria-label="Close project">Close ×</button>
+  </div>
+  <div class="modal-content">
+    <div class="modal-intro">
+      <div>
+        <div class="eyebrow" id="modalType">Architecture</div>
+        <h2 id="modalHeading">Project</h2>
+      </div>
+      <div class="modal-year mono" id="modalYear">2026</div>
+    </div>
+    <div id="mediaGrid" class="media-grid"></div>
+  </div>
+</div>
+
+<!--
+ CV CONTENT — this is placeholder text. Replace the entries below
+ (education, experience, licenses, skills) with your real CV content.
+-->
+<div id="cvModal" class="modal" aria-hidden="true">
+  <div class="modal-top">
+    <div><span class="mono">CV</span> / Curriculum Vitae</div>
+    <button onclick="closeCV()" aria-label="Close CV">Close ×</button>
+  </div>
+  <div class="cv-content">
+    <div class="cv-head">
+      <h2>Nhiel Andrey T. Fronda</h2>
+      <div class="cred">SO2, RMP</div>
+      <div class="role">Architectural Product Designer</div>
+    </div>
+
+    <div class="cv-section">
+      <h3>Profile</h3>
+      <p style="max-width:70ch">One or two sentences summarizing your background, focus area and what you bring to a project. <!-- EDIT: your summary --></p>
+    </div>
+
+    <div class="cv-section">
+      <h3>Licenses &amp; Certifications</h3>
+      <div class="cv-entry">
+        <div class="cv-date">— <!-- EDIT: year/expiry --></div>
+        <div><div class="cv-title">SO2 <!-- EDIT: full name of license --></div><div class="cv-sub">Issuing body · License no. <!-- EDIT --></div></div>
+      </div>
+      <div class="cv-entry">
+        <div class="cv-date">— <!-- EDIT: year/expiry --></div>
+        <div><div class="cv-title">RMP <!-- EDIT: full name of license --></div><div class="cv-sub">Issuing body · License no. <!-- EDIT --></div></div>
+      </div>
+    </div>
+
+    <div class="cv-section">
+      <h3>Experience</h3>
+      <div class="cv-entry">
+        <div class="cv-date">20XX — Present<!-- EDIT --></div>
+        <div><div class="cv-title">Job title <!-- EDIT --></div><div class="cv-sub">Company name · Location <!-- EDIT --></div>
+        <p>What you did and delivered in this role. <!-- EDIT --></p></div>
+      </div>
+      <div class="cv-entry">
+        <div class="cv-date">20XX — 20XX<!-- EDIT --></div>
+        <div><div class="cv-title">Job title <!-- EDIT --></div><div class="cv-sub">Company name · Location <!-- EDIT --></div>
+        <p>What you did and delivered in this role. <!-- EDIT --></p></div>
+      </div>
+    </div>
+
+    <div class="cv-section">
+      <h3>Education</h3>
+      <div class="cv-entry">
+        <div class="cv-date">20XX<!-- EDIT --></div>
+        <div><div class="cv-title">Degree <!-- EDIT --></div><div class="cv-sub">School name <!-- EDIT --></div></div>
+      </div>
+    </div>
+
+    <div class="cv-section">
+      <h3>Skills</h3>
+      <div class="cv-tags">
+        <span>AutoCAD<!-- EDIT --></span><span>Revit<!-- EDIT --></span><span>SketchUp<!-- EDIT --></span>
+        <span>Rendering<!-- EDIT --></span><span>BIM<!-- EDIT --></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="model" class="model">
+<div class="modelbar"><span>Interactive 3D / Portfolio Models</span><span>Powered by Sketchfab · Orbit · Zoom · Pan</span></div>
+<div class="sketchfab-tabs" role="tablist" aria-label="Interactive 3D models">
+  <button type="button" class="sketchfab-tab active" data-model="0" role="tab" aria-selected="true">01 · Kings Forth highend 01</button>
+  <button type="button" class="sketchfab-tab" data-model="1" role="tab" aria-selected="false">02 · kings Forth highend 02</button>
+  <button type="button" class="sketchfab-tab" data-model="2" role="tab" aria-selected="false">03 · Model 03</button>
+  <button type="button" class="sketchfab-tab" data-model="3" role="tab" aria-selected="false">04 · Model 04</button>
+  <button type="button" class="sketchfab-tab" data-model="4" role="tab" aria-selected="false">05 · Model 05</button>
+</div>
+<div id="viewer" class="sketchfab-viewer">
+  <iframe id="sketchfabViewer" title="Interactive Sketchfab 3D Model"
+    frameborder="0"
+    allow="autoplay; fullscreen; xr-spatial-tracking"
+    mozallowfullscreen="true" webkitallowfullscreen="true" allowfullscreen></iframe>
+  <div class="model-note">Sketchfab 3D / Drag to orbit · Scroll to zoom · Right-drag to pan</div>
+</div>
+</section>
+
+<section id="about" class="about">
+  <h2>About</h2>
+  <p>Designing with a balance of architectural intent, technical clarity and visual restraint — from early massing and drawings through to detailing and built execution.</p>
+</section>
+
+<footer id="contact">
+  <div class="fnote">
+    © 2026 Nhiel Andrey T. Fronda, SO2, RMP<br>
+    SCALE: NTS &nbsp; DWG NO: A-000
+  </div>
+  <div class="fnote">
+    n.fronda@example.com<!-- EDIT --><br>
+    +63 900 000 0000<!-- EDIT -->
+  </div>
+  <div class="flinks">
+    <a href="https://linkedin.com/in/nhielfronda" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://instagram.com/nhielfronda" target="_blank" rel="noopener">Instagram</a>
+  </div>
+</footer>
+</div>
+
+
+<script>
+// Set youtube:'VIDEO_ID' per project (see setup notes at top of file).
+const PROJECTS = [
+  {id:1,tag:'A-101',title:'Kings Forth Subdivision',type:'Subdivision Residential / Concept',year:2026,
+    media:['images/01.png','images/02.png','images/03.png','images/project-01-plan.jpg'],youtube:'https://www.youtube.com/watch?v=TJUza0ORxgs&t=681s'},
+  {id:2,tag:'A-102',title:'Concrete / Light',type:'Commercial / Interior',year:2025,
+    media:['images/project-02-01.jpg','images/project-02-02.jpg','images/project-02-03.jpg'],youtube:'https://youtu.be/GggJQPRdok4?si=RVLXr83C4hyEc9JC'},
+  {id:3,tag:'A-103',title:'Northline Office',type:'Workplace / Fit-out',year:2025,
+    media:['images/project-03-01.jpg','images/project-03-02.jpg','images/project-03-03.jpg'],youtube:'https://www.youtube.com/watch?v=YOUR_VIDEO_ID_03'},
+  {id:4,tag:'A-104',title:'Tropical Residence',type:'Residential / Development',year:2024,
+    media:['images/project-04-01.jpg','images/project-04-02.jpg','images/project-04-03.jpg'],youtube:'https://www.youtube.com/watch?v=YOUR_VIDEO_ID_04'},
+  {id:5,tag:'A-105',title:'Open Studio',type:'Interior / Workplace',year:2024,
+    media:['images/project-05-01.jpg','images/project-05-02.jpg','images/project-05-03.jpg'],youtube:'https://www.youtube.com/watch?v=YOUR_VIDEO_ID_05'},
+  {id:6,tag:'A-106',title:'Urban Housing',type:'Masterplan / Architecture',year:2023,
+    media:['images/project-06-01.jpg','images/project-06-02.jpg','images/project-06-03.jpg'],youtube:'https://www.youtube.com/watch?v=YOUR_VIDEO_ID_06'}
+];
+
+function getYouTubeEmbedUrl(url){
+  try{
+    const u=new URL(url);
+    let id='';
+    if(u.hostname.includes('youtu.be')){
+      id=u.pathname.slice(1).split('/')[0];
+    }else if(u.pathname.startsWith('/shorts/')){
+      id=u.pathname.split('/')[2] || '';
+    }else if(u.pathname.startsWith('/embed/')){
+      id=u.pathname.split('/')[2] || '';
+    }else{
+      id=u.searchParams.get('v') || '';
+    }
+    return id ? `https://www.youtube.com/embed/${id}?rel=0` : '';
+  }catch(e){
+    return '';
+  }
+}
+
+function openProject(id){
+  const p=PROJECTS.find(x=>x.id===id);
+  if(!p)return;
+  document.getElementById('modalNumber').textContent=p.tag;
+  document.getElementById('modalTitle').textContent=p.title;
+  document.getElementById('modalHeading').textContent=p.title;
+  document.getElementById('modalType').textContent=p.type;
+  document.getElementById('modalYear').textContent=p.year;
+  const grid=document.getElementById('mediaGrid');
+  grid.innerHTML='';
+  p.media.forEach((src,i)=>{
+    const item=document.createElement('figure');
+    item.className='media-item'+(i===0?' wide':'');
+    item.innerHTML=`<img src="${src}" alt="${p.title} image ${i+1}"><div class="media-label">Image ${String(i+1).padStart(2,'0')}</div>`;
+    grid.appendChild(item);
+  });
+  if(p.youtube && !p.youtube.startsWith('YOUR_VIDEO_ID')){
+    const item=document.createElement('figure');
+    item.className='media-item wide';
+    item.innerHTML=`<div class="youtube-frame">
+        <iframe src="https://www.youtube.com/embed/${p.youtube}" title="${p.title} project video"
+          loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen></iframe>
+      </div><div class="media-label">Project video — YouTube</div>`;
+    grid.appendChild(item);
+  }
+  const modal=document.getElementById('projectModal');
+  modal.classList.add('open'); modal.setAttribute('aria-hidden','false');
+  document.body.style.overflow='hidden';
+}
+function closeProject(){
+  const modal=document.getElementById('projectModal');
+  modal.classList.remove('open'); modal.setAttribute('aria-hidden','true');
+  document.body.style.overflow='';
+}
+function openCV(){
+  const modal=document.getElementById('cvModal');
+  modal.classList.add('open'); modal.setAttribute('aria-hidden','false');
+  document.body.style.overflow='hidden';
+}
+function closeCV(){
+  const modal=document.getElementById('cvModal');
+  modal.classList.remove('open'); modal.setAttribute('aria-hidden','true');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeProject();closeCV();}});
+</script>
+
+<script>
+  // ============================================================
+  // SKETCHFAB 3D VIEWER — 5 MODEL TABS
+  // Paste ONLY the Sketchfab model ID into each id field below.
+  // Example URL:
+  // https://sketchfab.com/3d-models/name/c21a94c29f594a5aa047dce71b904b14
+  // The ID is the final 32-character value.
+  // ============================================================
+  const SKETCHFAB_MODELS = [
+    { id:'c21a94c29f594a5aa047dce71b904b14', name:'Kings Forth Highend' },
+    { id:'a86d21290c664117a19f2bb59135e9fa', name:'kingsforth-highend-2' },
+    { id:'PASTE_MODEL_ID_03_HERE', name:'Model 03' },
+    { id:'PASTE_MODEL_ID_04_HERE', name:'Model 04' },
+    { id:'PASTE_MODEL_ID_05_HERE', name:'Model 05' }
+  ];
+
+  const sketchfabFrame = document.getElementById('sketchfabViewer');
+  const sketchfabTabs = document.querySelectorAll('.sketchfab-tab');
+
+  function loadSketchfabModel(index){
+    const model = SKETCHFAB_MODELS[index];
+    if(!sketchfabFrame || !model) return;
+
+    if(model.id.startsWith('PASTE_')){
+      sketchfabFrame.removeAttribute('src');
+      sketchfabFrame.title = model.name + ' — Add Sketchfab Model ID';
+      return;
+    }
+
+    const params = new URLSearchParams({
+      autostart:'1',
+      ui_theme:'dark',
+      ui_controls:'1',
+      ui_infos:'0',
+      ui_watermark:'0',
+      transparent:'0'
+    });
+
+    sketchfabFrame.title = model.name + ' — Interactive 3D Model';
+    sketchfabFrame.src = `https://sketchfab.com/models/${model.id}/embed?${params.toString()}`;
+
+    sketchfabTabs.forEach((tab,i)=>{
+      const active = i === index;
+      tab.classList.toggle('active',active);
+      tab.setAttribute('aria-selected',active ? 'true' : 'false');
+    });
+  }
+
+  sketchfabTabs.forEach((tab)=>{
+    tab.addEventListener('click',()=>{
+      loadSketchfabModel(Number(tab.dataset.model));
+    });
+  });
+
+  loadSketchfabModel(0);
+</script>
+</body>
+</html>
