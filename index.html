@@ -2782,6 +2782,141 @@ div{
 }
 </style>
 
+
+<style id="tools-logo-above-text">
+/* ============================================================
+   TOOLS — LOGO ABOVE NAME + DESCRIPTION
+   Keep every tool card vertically stacked.
+   ============================================================ */
+
+.front-skills .skill-card.software-skill{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  gap:18px;
+  min-width:0;
+}
+
+.front-skills .skill-card.software-skill img{
+  flex:0 0 auto;
+  width:150px;
+  height:150px;
+  max-width:100%;
+  object-fit:contain;
+  object-position:center;
+  margin:0 auto;
+}
+
+.front-skills .skill-card.software-skill .tool-copy{
+  width:100%;
+  min-width:0;
+  align-self:stretch;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+}
+
+.front-skills .skill-card.software-skill .tool-name{
+  display:block;
+  width:100%;
+  margin:0 0 10px;
+  color:#fff;
+  overflow-wrap:anywhere;
+  word-break:normal;
+}
+
+.front-skills .skill-card.software-skill .tool-description{
+  display:block;
+  width:100%;
+  max-width:52ch;
+  margin:0 auto;
+  color:#d0d0d0;
+  overflow-wrap:anywhere;
+  word-break:normal;
+}
+
+/* Tablet */
+@media (max-width:850px){
+  .front-skills .skill-card.software-skill{
+    min-height:220px;
+    padding:24px;
+  }
+
+  .front-skills .skill-card.software-skill img{
+    width:120px;
+    height:120px;
+  }
+}
+
+/* Mobile */
+@media (max-width:600px){
+  .front-skills .skill-card.software-skill{
+    min-height:0;
+    padding:24px 18px 28px;
+    gap:14px;
+  }
+
+  .front-skills .skill-card.software-skill img{
+    width:90px;
+    height:90px;
+  }
+
+  .front-skills .skill-card.software-skill .tool-name{
+    font-size:21px;
+    line-height:1.1;
+    margin-bottom:8px;
+  }
+
+  .front-skills .skill-card.software-skill .tool-description{
+    font-size:11px;
+    line-height:1.55;
+    max-width:100%;
+  }
+}
+
+/* Very small phones */
+@media (max-width:425px){
+  .front-skills .skill-card.software-skill{
+    padding:22px 15px 26px;
+  }
+
+  .front-skills .skill-card.software-skill img{
+    width:80px;
+    height:80px;
+  }
+}
+
+@media (max-width:375px){
+  .front-skills .skill-card.software-skill img{
+    width:72px;
+    height:72px;
+  }
+
+  .front-skills .skill-card.software-skill .tool-name{
+    font-size:20px;
+  }
+}
+
+@media (max-width:320px){
+  .front-skills .skill-card.software-skill{
+    padding-left:12px;
+    padding-right:12px;
+  }
+
+  .front-skills .skill-card.software-skill img{
+    width:68px;
+    height:68px;
+  }
+
+  .front-skills .skill-card.software-skill .tool-name{
+    font-size:19px;
+  }
+}
+</style>
+
 </head>
 <body>
 <!--
