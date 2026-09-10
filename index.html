@@ -2246,6 +2246,80 @@ header .wrap{
 }
 </style>
 
+
+<style id="project-modal-header-layer-fix">
+/* Project modal must always sit above the fixed site header. */
+header{
+  z-index:1000;
+}
+
+#projectModal{
+  position:fixed !important;
+  z-index:5000 !important;
+  isolation:isolate;
+}
+
+/* Keep the project modal content and close control above every header layer. */
+#projectModal .project-modal-shell{
+  position:relative;
+  z-index:5001;
+  isolation:isolate;
+}
+
+#projectModal .project-close{
+  position:absolute;
+  top:16px;
+  right:16px;
+  z-index:5002 !important;
+  pointer-events:auto;
+}
+
+/* Responsive clearance so the close button remains comfortably clickable. */
+@media(max-width:750px){
+  #projectModal .project-modal-shell{
+    z-index:5001;
+  }
+
+  #projectModal .project-close{
+    top:12px;
+    right:12px;
+    width:42px;
+    height:42px;
+    z-index:5002 !important;
+  }
+}
+</style>
+
+
+<style id="cv-modal-header-layer-fix">
+/* CV modal also stays completely in front of the fixed site header. */
+#cvModal{
+  position:fixed !important;
+  z-index:5000 !important;
+  isolation:isolate;
+}
+
+/* Keep the CV modal's own top bar above all CV content and the site header. */
+#cvModal .modal-top{
+  position:sticky;
+  top:0;
+  z-index:5002 !important;
+}
+
+/* Keep the CV document safely below the modal controls but above the page. */
+#cvModal .cv-content{
+  position:relative;
+  z-index:5001;
+}
+
+/* Responsive spacing so the CV content never starts underneath the fixed header. */
+@media(max-width:750px){
+  #cvModal .cv-content{
+    margin-top:18px;
+  }
+}
+</style>
+
 </head>
 <body>
 <!--
